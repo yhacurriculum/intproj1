@@ -1,0 +1,9 @@
+<ul class="thredded--navigation-breadcrumbs">
+  <span>&nbsp;</span>
+  <li><span>&nbsp;</span><i class="fa fa-search fa-lg"><span>&nbsp;</span></i>Path_Finder</li>
+  <li><%= link_to t('thredded.nav.all_messageboards'), messageboards_path %></li>
+  <% if messageboard_or_nil.try(:persisted?) %>
+    <li><%= link_to messageboard.name, messageboard_topics_path(messageboard) %></li>
+  <% end %>
+    <li><%= render 'thredded/search/form', messageboard: messageboard_or_nil %></li>
+</ul>

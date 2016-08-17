@@ -1,0 +1,57 @@
+<% provide(:title, "Users Page") %>
+<% provide(:agents, "active") %>
+    
+
+<% if signed_in? %>
+  <div class="container">
+    <h1><i class='fa fa-user-secret fa-lg'></i> &nbsp; Secret Agents</h1>
+    
+    <div id="custom-search-input">
+      <div class="input-group col-md-12">
+        <%= form_tag(users_path, :method => "get", id: "search-form") do %>
+          <span class="input-group-btn">
+            <%= text_field_tag :search, params[:search], placeholder: "Search Agents", :class => "search-query form-control" %>
+            <%= button_tag(type: 'submit', class: "btn btn-danger") do %>
+              <span class="glyphicon glyphicon-search"></span> 
+            <% end %>
+          </span>
+        <% end %>
+      </div>
+    </div>
+    
+    <br>
+    
+    <div id="users_tbl">
+      <div class="row">
+        <% @users.each do |user| %>
+        
+          <% if ((user.name).to_s).length > max_nickname_length %>
+              <% user.name = "Anonymous" %>
+          <% end %>
+            <div class="col-sm-4">
+              <%= link_to user do %>
+                <div class="card">
+                  <canvas class="header-bg" width="250" height="70" id="header-blur"></canvas>
+                  <div class="avatar">
+                      <%= image_tag user.image_url %>
+                  </div>
+                  <div class="content">
+                      <h3 class = "userName_Font_And_Size"><%= user.name %></h3>
+                      
+                      <p class = "user_Real_Name_Font"><%= user.realname.blank? ? "{Your Realname}" : user.realname %></p>
+                       
+                      <p> <i class="fa fa-paper-plane"></i> <%= link_to "Profile Info", user, :class => "btn btn-link" %></p>
+                  </div>
+                </div>
+              <% end %>
+            </div><!--END cols sm 4-->
+           
+        <% end %>
+      </div><!---END ROW--->
+    </div><!--END USERS Table -->
+    <%= paginate @users %>
+  </div><!--END container -->
+  
+<% else %>
+    <script> history.back(); </script>
+<% end %>

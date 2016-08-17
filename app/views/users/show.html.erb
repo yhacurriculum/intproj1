@@ -1,0 +1,96 @@
+<% provide(:title, "Show Profile") %>
+<% provide(:show, "active") %>
+
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+<div class="container">
+	  <div class="col-md-4">
+		  <div id="profile_left_bar">
+		      <br>
+    	    <%= image_tag @user.image_url, :class => "avatar img-circle profile_img" %>
+    	    <br>
+    	</div>
+    	
+    	  <div class="col-md-4 col-xs-4" id="formating_back">
+          <%= link_to raw("<i class='fa fa-mail-reply fa-lg'>Back</i>"), users_path, :class => "btn btn-warning" %>
+        </div>
+
+    	<br>
+    	<hr>
+    	
+    	<div id="profile_navigation_btns">
+  	    <div class="col-md-12">
+  	      <br>
+  	      
+  	       <script src="https://apis.google.com/js/platform.js" async defer></script>
+           <script src="https://apis.google.com/js/platform.js" async defer></script>
+           
+  	      <g:hangout  render="createhangout" invites="[{ id : '<%=@user.email %>', invite_type : 'EMAIL' }]"></g:hangout>
+  	      &nbsp;
+  	      <g:plusone  id='button2'></g:plusone>
+          <!--
+          <%= link_to raw("<i class='fa fa-weixin fa-lg'></i> <hr> Call"), { :anchor => "hangout_alert_popup" }, :class => "col-md-4 col-xs-4 well" %>
+          <%= link_to raw("<i class='fa fa-users fa-lg'></i> <hr> 14"), { :anchor => "google+_alert_popup" }, :class => "col-md-4 col-xs-4 well" %>
+          <%= link_to raw("<i class='fa fa-google-plus fa-lg'></i> <hr> show"), { :anchor => "google+_alert_popup" }, :class => "col-md-4 col-xs-4 well" %>
+          --> 
+        
+        </div>
+      </div>
+  
+		</div>
+		
+	  <div class="col-md-8  col-xs-12">
+       <div class="profile_info">
+          <h1> <!-- <hr size=6 width=50%> -->
+            <% if ((@user.name).to_s).length > max_nickname_length %>
+                <% @user.name = "Anonymous" %>
+            <% end %>
+            <i class='fa fa-user-secret fa-lg'></i><%= @user.name %> <br> <span class="sub_Title" style="font-size: 50%;"> <%= @user.realname %></span> 
+            <span>
+              <% if (@user == current_user || current_user.admin?) && ( ( (@user.name).to_s != supper_admin) || ( (current_user.name).to_s == supper_admin ) ) %>
+              	<span class = "formating_Edit">
+                	<%= link_to raw("<i class='fa fa-wrench fa-lg'> Edit Agent Profile</i>"), edit_user_path(@user), :class => "btn btn-info" %>
+              	</span>
+            	<% end %>
+          </span>
+          
+          </h1>
+
+          <hr>
+          
+          <h4 class="sub_Title">Bio: </h4>
+          <div class="sub_Info"><%= @user.bio.blank? ? "You still need a bio" : @user.bio %></div>
+          <br>
+          
+          <h4 class="sub_Title">Date of Birth: </h4>
+          <div class="sub_Info"><%= @user.dob.blank? ? "You still need a date of birth" : @user.dob %></div>
+          <br>
+          
+          <h4 class="sub_Title">Phone Number: </h4>
+          <div class="sub_Info"><%= @user.phone.blank? ? "You still need a phone number" : number_to_phone(@user.phone, area_code: true)%></div>
+          <br>
+          
+          <h4 class="sub_Title">State: </h4>
+          <div class="sub_Info"><%= @user.state.blank? ? "You still need a state" : @user.state %></div>
+          <br>
+          
+          <h4 class="sub_Title">City / Town: </h4>
+          <div class="sub_Info"><%= @user.city.blank? ? "You still need a city and town" : @user.city %></div>
+          <br>
+          
+          <h4 class="sub_Title">Zip Code: </h4>
+          <div class="sub_Info"><%= @user.zip.blank? ? "You still need a zip code" : @user.zip %></div>
+          <br>
+          
+          <h4 class="sub_Title">Email: </h4>
+          <div class="sub_Info"><%= @user.email %></div>
+          <br>
+       </div>
+       
+    </div>
+</div>
+
+
+
+

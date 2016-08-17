@@ -1,0 +1,35 @@
+<% if current_user %>
+  <% if current_user.ban == false %>
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
+        
+        <title>Thredded | <%= yield :thredded_page_title %></title>
+        <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+        <%= stylesheet_link_tag 'thredded' %>
+        <%= stylesheet_link_tag 'thredded_app' %>
+        <%= csrf_meta_tag %>
+        <%= javascript_include_tag 'thredded' %>
+        <%= javascript_include_tag 'thredded_app' %>
+        <%== Gravatar.prefetch_dns %>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        
+      </head>
+      <body>
+        <!-- MAIN -->
+        <div class="main_content_thredded <%= controller.controller_name %>">
+          <%= yield %>
+        </div>
+      </body>
+    </html>
+  <% else %>
+    <script>
+        alert("You have been banned from the system please contact Geoff Abbott.");
+        window.location.href = '/signout';
+    </script>
+  <% end %>
+<% else %>
+  <script> history.back(); </script>
+<% end %>

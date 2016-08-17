@@ -1,0 +1,207 @@
+
+<% if (@user.name).to_s != supper_admin || current_user.name == supper_admin %>
+  <% provide(:title, "Edit Profile") %>
+  <% provide(:edit, "active") %>
+  
+  <%= form_for (@user), :html => { :multipart => true} do |f| %>
+  
+    <div class="container">
+        <h1><i class='fa fa-user-secret fa-lg'></i> &nbsp; Edit Agent Profile</h1>
+      	<hr>
+    	<div class="row">
+          <!-- left column -->
+          <div class="col-md-3">
+            <div class="text-center">
+              
+              <%= image_tag @user.image_url, :class => "avatar img-circle profile_img", :data => {toggle: "tooltip", placement: "bottom" }, :title => "Past Image-URL Below To Change Your Avatar" %>
+
+                  <div class = "input-group image_field">
+                    <label class="col-lg-3 control-label image_label"> Image_url</label>
+                    <%= f.text_field :image_url, :class => "form-control", :id => "image_url", :data => {toggle: "tooltip", placement: "bottom" }, :title => "Past Image-URL Here To Change Your Avatar" %>
+                  </div><!-- /input-group -->
+            
+            <script>
+              $(document).ready(function(){
+                  $('#image_url').tooltip();
+                  $('.profile_img').tooltip();
+                  $('#agent_nickname_textbox').tooltip();
+                  
+              });
+            </script>
+
+            </div>
+          </div>
+          
+          <br>
+          
+           <!-- edit form column -->
+          <div class="col-md-9 personal-info">
+            <% if @user.errors.any? %>
+              <div class="alert alert-danger alert-dismissable">
+                <a class="panel-close close" data-dismiss="alert">×</a> 
+                <i class="fa fa-coffee"></i>
+      
+                
+                  <div id="error_explanation">
+                    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+              
+                    <ul>
+                    <% @user.errors.full_messages.each do |message| %>
+                      <li><%= message %></li>
+                    <% end %>
+                    </ul>
+                  </div>
+                </div>
+            <% end %>
+            
+            <h3>Personal info</h3>
+            <!-- Username -->
+            <form class="form-horizontal" role="form">
+              <div class="form-group">
+                <label class="col-lg-3 control-label">Agent Nickname</label>
+                <div class="col-lg-8">
+                  <% if (@user.name).to_s ==  supper_admin %>
+                    <%= f.text_field :name, :class => "form-control", :placeholder => "Example: user01", :required => "true", :maxlength => max_nickname_length, :disabled => "true" %>
+                  <% else %>
+                  
+                    <%if (((@user.name).to_s).length > max_nickname_length) %>
+                      <% @user.name = "Anonymous" %>
+                      <%= f.text_field :name, :class => "form-control", :placeholder => "Example: user01", :required => "true", :maxlength => max_nickname_length, :data => {toggle: "tooltip", placement: "top" }, :title => "Max: 20 characters", :id => "agent_nickname_textbox"  %>
+                    <%else%>
+                      <%= f.text_field :name, :class => "form-control", :placeholder => "Example: user01", :required => "true", :maxlength => max_nickname_length, :data => {toggle: "tooltip", placement: "top" }, :title => "Max: 20 characters", :id => "agent_nickname_textbox" %>
+                    <%end%>
+                   
+                    
+                  <% end %>
+                </div>
+              </div>
+              
+               <!-- Real Name -->
+              <div class="form-group">
+                <label class="col-lg-3 control-label">Real Name</label>
+                <div class="col-lg-8">
+                  <%= f.text_field :realname, :class => "form-control", :id => "disabledInput", :disabled => "true" %>
+                </div>
+              </div>
+              
+              
+              <!-- Bio -->
+              <div class="form-group">
+                <label class="col-lg-3 control-label">Bio</label>
+                <div class="col-lg-8">
+                  <%= f.text_area :bio, :class => "form-control", :placeholder => "Write an intoduction about yourself here . . ." %>
+                </div>
+              </div>
+              
+              <!-- Date of Birth -->
+              <div class="form-group">
+                <label class="col-lg-3 control-label">Date of Birth</label>
+                <div class="col-lg-8">
+                    <%= f.date_field :dob, :class => "form-control", :id => "exampleInputDOB1", :value => @user.dob %>
+                </div>
+              </div>
+              
+              <!-- Phone Number-->
+              <div class="form-group">
+                  <label class="col-lg-3 control-label">Phone Number</label>
+                  <div class="col-lg-8">
+                    <%= f.text_field :phone, :class => "form-control", :id => "phone-number", :placeholder => "(xxx)-xxx-xxxx", :onkeypress => 'return ( (event.charCode >= 48 && event.charCode <= 57) || (event.charCode == 40) || (event.charCode == 41) || (event.charCode == 45) )', :maxlength => 14 %>
+                  </div>
+              </div>
+              
+              <!-- State -->
+              
+              <div class="form-group">
+                <label class="col-lg-3 control-label">State</label>
+                <div class="col-lg-8">
+                  <%= f.select(:state, options_for_select(us_states, @user.state), {}, {:class => 'form-control'} )%>
+                </div>
+              </div>
+              
+              
+              <!-- City / Town-->
+              <div class="form-group">
+                  <label class="col-lg-3 control-label">City / Town</label>
+                  <div class="col-lg-8">
+                    <%= f.text_field :city, :class => "form-control", :id => "city", :placeholder => "city" %>
+                  </div>
+              </div>
+  
+              <!-- Zip code -->
+              <div class="form-group">
+                <label class="col-lg-3 control-label">Zip Code</label>
+                <div class="col-lg-8">
+                    <%= f.text_field :zip, :class => "form-control", :id => "zip", :placeholder => "Zip-code / postcode", :maxlength => "5", :onkeypress  => 'return event.charCode >= 48 && event.charCode <= 57'%>
+                </div>
+              </div>
+              
+              
+              <!-- Email -->
+              <div class="form-group">
+                <label class="col-lg-3 control-label">Email</label>
+                <div class="col-lg-8">
+                  <%= f.text_field :email, :class => "form-control", :id => "disabledInput", :disabled => "true" %>
+                </div>
+              </div>
+              
+              <!-- btns -->
+              <div class="form-group">
+                <label class="col-md-3 control-label"></label>
+                <div class="col-md-8">
+                  <br>
+                  <%= button_tag raw("<i class='fa fa-check-circle-o fa-lg'> &nbsp; Save</i>"), :class => "btn btn-primary" %>
+                  <span></span>
+                  <%if (((current_user.name).to_s).length > max_nickname_length) %>
+                    <%= link_to raw("<i class='fa fa-times-circle-o fa-lg'> &nbsp; Cancel</i>"), @user, method: :delete, data: { confirm: 'Are you sure ?' }, :class => "btn btn-warning" %>
+                  <% else %>
+                    <%= link_to raw("<i class='fa fa-times-circle-o fa-lg'> &nbsp; Cancel</i>"), @user, :class => "btn btn-warning" %>
+                  <% end %>
+                  
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <hr>
+      </div>
+          
+  <% end %>
+  
+  <% if (@user.name).to_s != supper_admin %>
+    <%= form_for (@user) do |t| %>
+        <% if current_user.admin? %>
+          <% if @user.ban == false %>
+            <span id="ban_btn" >
+               <%= t.hidden_field :ban, :value => true %>
+               <%= button_tag raw("<i class='<i fa fa-trash-o fa-lg'> &nbsp; Ban Account</i>"), :class => "btn btn-danger btn-sm" %>
+          	</span>  
+        	<% else %>
+        	   <span id="ban_btn" >
+        	      <%= t.hidden_field :ban, :value => false %>
+                <%= button_tag raw("<i class='<i fa fa-check-circle fa-lg'> &nbsp; Un-Ban Account</i>"), :class => "btn btn-success btn-sm" %>
+             </span>
+          <% end %>
+        <% end %>
+    <% end %>
+  <% end %>
+  
+  <% if (current_user.name).to_s == supper_admin && (@user.name).to_s != supper_admin %>
+    <%= form_for (@user) do |u| %>
+        <% if !(@user.admin?) %>
+          <span id="admin_btn" >
+             <%= u.hidden_field :admin, :value => true %>
+             <%= button_tag raw("<i class='<i fa fa-check-circle fa-lg'> &nbsp; Promote Admin Privileges </i>"), :class => "btn btn-success btn-sm" %>
+        	</span>  
+      	<% else %>
+      	   <span id="admin_btn" >
+      	      <%= u.hidden_field :admin, :value => false %>
+              <%= button_tag raw("<i class='fa fa-times-circle' fa-lg></i> &nbsp; Demote Admin Privileges</i>"), :class => "btn btn-danger btn-sm" %>
+           </span>
+        <% end %>
+    <% end %>
+  <% end %>
+  
+      <br><br>
+<% else %>
+  <script>history.back();</script>
+<% end %>

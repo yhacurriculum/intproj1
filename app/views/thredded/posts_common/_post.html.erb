@@ -1,0 +1,66 @@
+<%# @param post [Thredded::PostView] %>
+
+<% if @switch == 0 %>
+    <%= content_tag :article, id: dom_id(post), class: 'thredded--post', :id => 'user_post' do %>
+      <% @switch = 1 %>
+      <header>
+      <%= image_tag post.user.image_url, class: 'thredded--post--avatar' if post.user %>
+      <h2 class="thredded--post--user"><%= user_link post.user %></h2>
+      <p class="thredded--post--created-at"><%= time_ago post.created_at %></p>
+    </header>
+
+    <div class="thredded--post--content">
+      <% cache [post, 'content'], expires_in: 1.week do %>
+        <%= post.filtered_content(self) %>
+      <% end %>
+    </div>
+      
+  
+    <% if  (post.can_update? && (thredded_current_user.name).to_s == (post.user).to_s) || current_user.admin? == true %>
+      <%= link_to t('thredded.posts.edit'), post.edit_path, class: 'thredded--post--edit' %>
+    <% end %>
+    
+    <span>&nbsp;</span>
+    
+    <% if  (post.can_destroy? && (thredded_current_user.name).to_s == (post.user).to_s) || current_user.admin? == true %>
+      
+      <%= link_to t('thredded.posts.delete'), post.destroy_path,
+                  method: :delete,
+                  class:  'thredded--post--delete',
+                  data:   { confirm: I18n.t('thredded.posts.delete_confirm') } %>
+    <% end %>
+  <% end %>
+  
+  
+<% else %>
+    <%= content_tag :article, id: dom_id(post), class: 'thredded--post', :id => 'user_post_1' do %>
+      <% @switch = 0 %>
+      <header>
+      <%= image_tag post.user.image_url, class: 'thredded--post--avatar' if post.user %>
+      <h2 class="thredded--post--user"><%= user_link post.user %></h2>
+      <p class="thredded--post--created-at"><%= time_ago post.created_at %></p>
+    </header>
+
+    <div class="thredded--post--content">
+      <% cache [post, 'content'], expires_in: 1.week do %>
+        <%= post.filtered_content(self) %>
+      <% end %>
+    </div>
+      
+  
+    <% if  (post.can_update? && (thredded_current_user.name).to_s == (post.user).to_s) || current_user.admin? == true %>
+      <%= link_to t('thredded.posts.edit'), post.edit_path, class: 'thredded--post--edit' %>
+    <% end %>
+    
+    <span>&nbsp;</span>
+    
+    <% if  (post.can_destroy? && (thredded_current_user.name).to_s == (post.user).to_s) || current_user.admin? == true %>
+      
+      <%= link_to t('thredded.posts.delete'), post.destroy_path,
+                  method: :delete,
+                  class:  'thredded--post--delete',
+                  data:   { confirm: I18n.t('thredded.posts.delete_confirm') } %>
+    <% end %>
+  <% end %>
+<% end %>
+    

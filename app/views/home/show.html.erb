@@ -1,0 +1,151 @@
+    <% provide(:title, "Home Page") %>
+    <% provide(:home, "active") %>
+
+<script type="text/javascript">
+  $(document).ready(function(){    
+      //Check if the current URL contains '#'
+      if(document.URL.indexOf("#")==-1)
+      {
+          // Set the URL to whatever it was plus "#".
+          url = document.URL+"#";
+          location = "#";
+  
+          //Reload the page
+          location.reload(true);
+      }
+  });
+</script>
+
+<div class="container">    
+    <div class="cover">
+      <div class="hi">
+          <div class="hovereffect">
+              <img class="img-responsive" src="http://i.nextmedia.com.au/Features/eagle_circle_big.png" alt="YHA_logo">
+              <div class="overlay">
+                 <h2>
+                   <div>
+                      Young Hacks Academy
+                   </div>
+                   <hr width="50%">
+                   <i class="fa fa-user-secret fa-lg"></i>The Agency
+                 </h2>
+                 <% if current_user %>
+                   <%= link_to raw("<i class='fa fa-newspaper-o fa-lg'></i> Profile"), current_user, :class => "info" %>
+                   <%= link_to raw("<i class='fa fa-users fa-lg'></i> Agents"), users_path, :class => "info" %>
+                   <%= link_to raw("<i class='fa fa-list-ul fa-lg'></i> DashBoard"), thredded_url, :class => "info"  %>
+                 <% else %>
+                     <%= link_to raw("<i class='fa fa-google-plus-square fa-lg'></i> Sign In With Google"), "/auth/google_oauth2", class: "info"  %>
+                 <% end %>
+              </div>
+          </div>
+      </div>
+          <!-- <%#= render "shared/footer" %> -->
+    </div>
+    
+    <div class="tv">
+    	  <div class="screen mute" id="tv"></div>
+    </div>
+    
+</div>   
+
+
+    <!-- About us & Slide Show Grid Section
+    <section id="Slide Show">
+        <div class="container">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+              <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+                <li data-target="#myCarousel" data-slide-to="3"></li>
+              </ol>
+          
+
+              <div class="carousel-inner" role="listbox">
+          
+                <div class="item active">
+                  <img src="http://learn2teach.pbworks.com/f/scratchsheet2.jpg">
+                  <div class="carousel-caption">
+                    <h3></h3>
+                    <p></p>
+                  </div>
+                </div>
+                
+                <div class="item">
+                  <img src="https://udemy-images.udemy.com/course/750x422/60344_92fc_3.jpg">
+                  <div class="carousel-caption">
+                    <h3></h3>
+                    <p></p>
+                  </div>
+                </div>
+                
+                <div class="item">
+                  <img src="http://4.bp.blogspot.com/-KfMLs-e3rxY/VUXe4VpqZyI/AAAAAAAAAGw/ZhbBLZ3j9hk/s1600/5-reasons-to-code.png">
+                  <div class="carousel-caption">
+                    <h3></h3>
+                    <p></p>
+                  </div>
+                </div>
+                
+                <div class="item">
+                  <img src="http://www1.pcmag.com/media/images/485120-learn-to-code.jpg?thumb=y&width=740&height=426">
+                  <div class="carousel-caption">
+                    <h3></h3>
+                    <p></p>
+                  </div>
+                </div>
+          
+              <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+          </div>
+        </div>
+    </section>
+
+    //About Section
+    <section class="success" id="about">
+        <div class="container" id="text">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>About</h2>
+                    <hr class="star-light" width="75%">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-lg-offset-2">
+                    <p>
+                        Young Hacks Academy is a summer camp for ages 6-14 that uses technology to develop real-world leadership skills.
+                        A blend of computer programming, problem-solving, and teamwork, YHA teaches kids to build cool video games about big challenges facing us on the local and global level.
+                    </p>
+                </div>
+                <div class="col-lg-4">
+                    <p>
+                        Encouraging young minds to “turn on” and see how they can become agents of change — future leaders and problem-solvers — through the creative use of technology.   
+                    </p>
+                </div>
+            </div>
+        </div>
+        <br>
+    </section>
+-->
+
+    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+    <!--
+    <div class="scroll-top page-scroll hidden-sm hidden-xs hidden-lg hidden-md">
+        <a class="btn btn-primary" href="#page-top">
+            <i class="fa fa-chevron-up"></i>
+        </a>
+    </div>
+    -->
+    
+    <!-- FOOTER -->
+    
+    
+    

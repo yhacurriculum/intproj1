@@ -1,0 +1,612 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+ 
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "thredded";
+
+/*** START FONT AREA ***/
+
+
+body
+{
+    font-family: 'Orbitron', sans-serif;
+}
+
+.navbar-brand
+{
+    padding-left: 1.5%;
+}
+
+@media (max-width: 1000px) {
+  .navbar-header {
+      float: none;
+  }
+  .navbar-left,.navbar-right {
+      float: none !important;
+  }
+  .navbar-toggle {
+      display: block;
+  }
+  .navbar-collapse {
+      border-top: 1px solid transparent;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+  }
+  .navbar-fixed-top {
+      top: 0;
+      border-width: 0 0 1px;
+  }
+  .navbar-collapse.collapse {
+      display: none!important;
+  }
+  .navbar-nav {
+      float: none!important;
+      margin-top: 7.5px;
+  }
+  .navbar-nav>li {
+      float: none;
+  }
+  .navbar-nav>li>a {
+      padding-top: 10px;
+      padding-bottom: 10px;
+  }
+  .collapse.in{
+      display:block !important;
+  }
+  
+  .navbar-brand
+    {
+        text-transform: uppercase; 
+        padding-left: 3%;
+    }
+    
+    .dropdown-menu
+    {
+        border: 0 none;
+        float: none;
+        padding: 5px 19px;
+        position: relative;
+        text-align: none;  
+        width: 27.5%;
+    }
+}
+
+#home_page
+{
+    background-color: #12548A;
+}
+
+.cover {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  height: 90%;
+  
+  .hi {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    
+    color: #fff;
+    text-align: center;
+    img
+    {
+        margin: auto;
+        height: 50%;
+        width: 50%;
+    }
+    
+    .hovereffect {
+        width:100%;
+        height:100%;
+        float:left;
+        overflow:hidden;
+        position:relative;
+        text-align:center;
+        cursor:default;
+        padding: 5%;
+        }
+        
+        .hovereffect .overlay {
+        width:100%;
+        height:100%;
+        position:absolute;
+        overflow:hidden;
+        top:0;
+        left:0;
+        opacity:0;
+        background-color:rgba(0,0,0,0.5);
+        -webkit-transition:all .4s ease-in-out;
+        transition:all .4s ease-in-out
+        }
+        
+        .hovereffect img {
+        display:block;
+        position:relative;
+        -webkit-transition:all .4s linear;
+        transition:all .4s linear;
+        }
+        
+        .hovereffect h2 {
+        text-transform:uppercase;
+        color:#fff;
+        text-align:center;
+        position:relative;
+        font-size: 200%;
+        background:rgba(0,0,0,0.6);
+        -webkit-transform:translatey(-100px);
+        -ms-transform:translatey(-100px);
+        transform:translatey(-100px);
+        -webkit-transition:all .2s ease-in-out;
+        transition:all .2s ease-in-out;
+        padding:10px;
+        }
+        
+        .hovereffect a.info {
+        text-decoration:none;
+        display:inline-block;
+        color:#fff;
+        border:1px solid #fff;
+        background-color: #282A2B;
+        
+        -webkit-transition:all .2s ease-in-out;
+        transition:all .2s ease-in-out;
+        margin: 50px 0 0;
+        padding:7px 14px;
+        }
+        
+        .hovereffect a.info:hover {
+        box-shadow:0 0 5px #fff;
+        }
+        
+        .hovereffect:hover img {
+        -ms-transform:scale(1.2);
+        -webkit-transform:scale(1.2);
+        transform:scale(1.2);
+        }
+        
+        .hovereffect:hover .overlay {
+        opacity:1;
+        filter:alpha(opacity=100);
+        }
+        
+        .hovereffect:hover h2,.hovereffect:hover a.info {
+        opacity:1;
+        filter:alpha(opacity=100);
+        -ms-transform:translatey(0);
+        -webkit-transform:translatey(0);
+        transform:translatey(0);
+        }
+        
+        .hovereffect:hover a.info {
+        -webkit-transition-delay:.2s;
+        transition-delay:.2s;
+        }
+
+  }
+}
+
+.tv {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+
+  width: 100%;
+  height: 110%;
+
+  overflow: hidden;
+  
+  .screen {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+
+    margin: auto;
+
+    opacity: 0;
+    transition: opacity .5s;
+
+    &.active {
+      opacity: 1;
+    }
+  }
+}
+
+
+@media (max-width: 900px), (max-height: 700px) 
+{
+    .cover 
+    {
+      .hi 
+       {
+            img
+            {
+                height: 75%;
+                width: 75%;
+            }
+            .hovereffect h2 {
+            font-size: 100%;
+            }
+        }
+    }
+}
+
+
+.btn, .user_Real_Name_Font, #about, .sub_Info, .col-lg-8
+{
+    font-family: 'Arial';
+}
+
+.userName_Font_And_Size
+{
+    font-size: 12pt;
+}
+
+/*** END FONT AREA ***/
+
+
+.main_content {
+    padding-top: 50px;
+}
+
+
+#about #text
+{
+    background-color: #fff;
+    opacity: 0.9;
+}
+
+#sign_out, #sign_in
+{
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.dropdown
+{
+    margin-top: 10px;
+}
+
+
+.col-lg-8
+{
+    padding: 5px;
+}
+
+
+@media (min-width: 360px) {
+  .carousel {
+      min-height: 440px;
+      margin-bottom: 60px;
+      margin-top: 20px;
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+  }
+    
+  /* Since positioning the image, we need to help out the caption */
+  .carousel-caption {
+        z-index: 10;
+    }
+
+   /* Declare heights because of positioning of img element */
+   .carousel .item {
+        min-height: 440px;
+        background-color: #777;
+    }
+    
+   .carousel-inner > .item > img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        min-width: 20%;
+        min-height: 440px;
+        height: 75px;
+        width: 100%;
+  }
+
+}
+ 
+ footer 
+ {
+
+     color: #fff;
+     background-color: #282A2B;
+ }
+ 
+ 
+ 
+ /*START USER PROFILE STYLE*/
+ .col-sm-4 {
+     padding-bottom: 50px;    
+ }
+ 
+ .src-image {
+  display: none;
+}
+h1{margin-bottom:35px;}
+.card {
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+  border-radius: 0px;
+  text-align: center;
+  padding: 0;
+  background-color: #284c79;
+  color: rgb(136, 172, 217);
+}
+.content{ margin-top:15px;}
+.content p{ color: #fff;}
+.content h3{ color: #fff;}
+.content .btn{ color: #fff;}
+.card .header-bg {
+  /* This stretches the canvas across the entire hero unit */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  border-bottom: 1px #FFF solid;
+  /* This positions the canvas under the text */
+  z-index: 1;
+}
+.card .avatar {
+  position: relative;
+  margin-top: 15px;
+  z-index: 100;
+  background-color: #9DBACC;
+}
+
+.card .avatar img {
+  width: 100px;
+  height: 100px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+    border: 5px solid rgba(237, 237, 237, 0.6);
+}
+
+ /*END USER PROFILE STYLE*/
+ 
+ /* START SHOW PROFILE STYLE */
+ 
+.well {
+    margin-top:-20px;
+    background-color:#007FBD;
+    border:2px solid #0077B2;
+    text-align:center;
+    cursor:pointer;
+    font-size: 25px;
+    padding: 15px;
+    border-radius: 0px !important;
+    color: #ffffff;
+}
+
+.well:hover {
+    margin-top:-20px;
+    background-color:#0077B2;
+    border:2px solid #0077B2;
+    text-align:center;
+    cursor:pointer;
+    font-size: 25px;
+    padding: 15px;
+    border-radius: 0px !important;
+    border-bottom : 2px solid rgba(97, 203, 255, 0.65);
+    color: #000000;
+    text-decoration: none;
+}
+
+.bg_blur
+{
+    padding-top: 60px;
+    height: 300px;
+    background-size: cover;
+}
+
+#profile_left_bar
+{
+    padding: 15% 0% 10% 23%;
+}
+
+#profile_navigation_btns
+{
+    margin: auto;
+}
+
+.profile_info
+{
+    background-color: #284c79;
+    color : #fff;
+    margin-top: 70px;
+    padding: 1%;
+}
+/*** START STYLING FOR SHOW PAGE INFO ***/
+.sub_Title
+{
+    color: #FFEEAA;
+}
+
+/*** END STYLING FOR SHOW PAGE INFO ***/
+
+.btn-style{
+    color: #fff;
+    background-color: #007FBE;
+    border-color: #adadad;
+    width: 33.3%;
+}
+
+.btn-style:hover {
+    color: #333;
+    background-color: #3D5DE0;
+    border-color: #adadad;
+    width: 33.3%;
+   
+}
+
+
+@media (max-width: 767px) {
+    .profile_info{
+        text-align : center;
+    }
+    
+}
+
+.formating_Edit
+{
+   padding-left: 75px; 
+}
+
+ 
+ /* END SHOW PROFILE STYLE*/
+
+    #custom-search-input {
+        margin:0;
+        margin-top: 10px;
+        padding: 0;
+    }
+ 
+    #custom-search-input .search-query {
+        padding-right: 3px;
+        padding-right: 4px \9;
+        padding-left: 3px;
+        padding-left: 4px \9;
+        /* IE7-8 doesn't have border-radius, so don't indent the padding */
+ 
+        margin-bottom: 0;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+    }
+ 
+    #custom-search-input button {
+        border: 0;
+        background: none;
+        /** belows styles are working good */
+        padding: 2px 5px;
+        margin-top: 2px;
+        position: relative;
+        left: -28px;
+        /* IE7-8 doesn't have border-radius, so don't indent the padding */
+        margin-bottom: 0;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        color:#D9230F;
+    }
+ 
+    .search-query:focus + button {
+        z-index: 3;   
+    }
+    
+/***  START EDIT STYLE  ***/
+
+label
+{
+    font-family: 'Orbitron', sans-serif;
+    padding-top: 10px;
+}
+
+#ban_btn
+{
+    position: absolute;
+    right: 1%;
+}
+#admin_btn
+{
+    position: absolute;
+    left: 1%;
+}
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+.profile_img
+{
+    width: 200px;
+    height: 200px;
+}
+
+#image_url
+{
+    font-size: 100%; 
+    font-family: sans-serif;
+    text-align: center;
+}
+
+.image_field
+{
+    margin: auto;
+    padding-top: 10px;
+}
+
+.image_label
+{
+    margin: auto;
+    text-align: center;
+}
+
+/***  END EDIT STYLE  ***/
+
+.pagination_bar
+{
+    margin: auto;
+    text-align: center;
+}
+
+.thredded--form--signout
+{
+      text-align: center;
+      color: #0C5;
+      font-size: 75%;
+      padding: 0px;
+      border: 1px solid #FF1604;
+      color: #000;
+      overflow: hidden;
+      transition: all 0.5s;
+      border-radius: 10px;
+}
+
+.thredded--form--signout:hover
+{
+    text-decoration: none;
+    cursor: pointer;
+    color: #FFF;
+    background: #FF1604;
+}

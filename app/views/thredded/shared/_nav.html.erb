@@ -1,0 +1,73 @@
+<nav class="thredded--navigation" role="navigation">
+    <ul class="thredded--user-navigation <%='thredded--user-navigation-standalone' if Thredded.standalone_layout? %>">
+      
+        <span class="navbar-brand">
+          <li class="thredded--user-navigation--standalone thredded--user-navigation--item"><%= link_to raw("<i class='fa fa-user-secret fa-lg'> </i> &nbsp; Young Hacks Academy"), main_app.root_path %></li>
+        </span>
+       
+        <span class="right_nav">
+          <li class="thredded--user-navigation--standalone thredded--user-navigation--item"> <%= link_to raw("<i class='fa fa-home fa-lg'></i> Home"), main_app.root_path %></li>
+      
+          <li class="thredded--user-navigation--standalone thredded--user-navigation--item"> <%= link_to raw("<i class='fa fa-users fa-lg'></i> Agents"), users_path %></li>
+      
+          <li class="thredded--user-navigation--standalone thredded--user-navigation--item"> <%= link_to raw("<i class='fa fa-list-ul fa-lg'></i> DashBoard"), thredded_url %> </li>
+      
+          
+          
+          <% if signed_in? && Thredded.standalone_layout? %>
+            <li class="thredded--user-navigation--profile thredded--user-navigation--item">
+              <a href="<%= user_path(thredded_current_user) %>"> <i class='fa fa-user-secret fa-lg'></i> Profile</a>
+            </li>
+            
+            <%= render 'thredded/shared/nav/private_topics' %>
+            
+            <li class="thredded--user-navigation--standalone thredded--user-navigation--item">
+              <%= link_to raw("<span>&nbsp;&nbsp;&nbsp;</span><i class='fa fa-power-off fa-lg'></i><span>&nbsp;&nbsp;&nbsp;</span>"), signout_path, :class => 'thredded--form--signout', :title => 'SIGN OUT'  %>
+            </li>
+          <% end %>
+          
+          
+      
+        <!-- <%= render 'thredded/shared/nav/notification_preferences', messageboard: messageboard_or_nil %> -->
+      
+          <% if Thredded.standalone_layout? %>
+            <%= render 'thredded/shared/nav/standalone' %>
+          <% end %>
+        </span>
+    </ul>
+  
+  <div class="thredded--main-navigation">
+    <%= yield :thredded_breadcrumbs %>
+  </div>
+  
+</nav>
+<br>
+
+
+<!-- MOBILE NAVBAR -->
+<span class="mobile_navbar">
+  <ul class="topnav">
+    <li class='brand'><%= link_to raw("<i class='fa fa-user-secret fa-lg'> </i> &nbsp; Young Hacks Academy"), main_app.root_path %></li>
+    <li><hr></li>
+    <li><%= link_to raw("<span>&nbsp;&nbsp;&nbsp;</span><i class='fa fa-users fa-lg'></i> Agents"), users_path %></li>
+    <li><%= link_to raw("<span>&nbsp;&nbsp;&nbsp;</span><i class='fa fa-list-ul fa-lg'></i> DashBoard"), thredded_url %></li>
+    <li><a href="<%= user_path(thredded_current_user) %>"><span>&nbsp;&nbsp;&nbsp;</span> <i class='fa fa-user-secret fa-lg'></i> Profile</a></li>
+    <li>
+        <%= link_to private_topics_path, rel: 'nofollow' do %>
+          <span>&nbsp;&nbsp;</span>
+          <%= inline_svg 'thredded/private-messages.svg',
+                         class: 'thredded--icon',
+                         title: safe_join([t('thredded.nav.private_topics'),
+                                           (unread_private_topics_count if unread_private_topics_count > 0)].compact, ' ') %>
+          <span class="thredded--nav-text"><%= t('thredded.nav.private_topics') %></span>
+          <% if unread_private_topics_count > 0 -%>
+            <span class="thredded--user-navigation--private-topics--unread"><%= unread_private_topics_count %></span>
+          <% end -%>
+        <% end -%>
+    </li>
+    <li><%= render 'thredded/search/form', messageboard: messageboard_or_nil %></li>
+    <li class="icon">
+        <a href="javascript:void(0);" onclick="myFunction()">&#9776;</a>
+    </li>
+  </ul>
+</span>
